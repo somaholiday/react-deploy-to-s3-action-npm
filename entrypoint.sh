@@ -31,6 +31,8 @@ fi
 NODE_ENV_PREPEND="NODE_ENV=${NODE_ENV:-production}"
 NODE_PUBLIC_URL_PREPEND="PUBLIC_URL=${PUBLIC_URL:-/}"
 
+echo ${NODE_PUBLIC_URL_PREPEND}
+
 # Create a dedicated profile for this action to avoid conflicts
 # with past/future actions.
 aws configure --profile react-deploy-to-s3-action <<-EOF > /dev/null 2>&1

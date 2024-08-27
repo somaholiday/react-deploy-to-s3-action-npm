@@ -29,7 +29,7 @@ fi
 
 # Override default NODE_ENV (production) if set by user.
 NODE_ENV_PREPEND="NODE_ENV=${NODE_ENV:-production}"
-NODE_PUBLIC_URL_PREPEND="PUBLIC_URL=${PUBLIC_URL:-https://multitool.everyside.com}"
+NODE_PUBLIC_URL_PREPEND="PUBLIC_URL=${PUBLIC_URL:-https://multitool.xyz}"
 
 echo ${NODE_PUBLIC_URL_PREPEND}
 

@@ -11,6 +11,7 @@ RUN apk --no-cache add \
         py3-pip \
         py-pip && \
         pip install --break-system-packages --upgrade pip awscli s3cmd  && \
+        npm install typescript -g && \
         mkdir /root/.aws
 
 ENV PATH=/github/workspace/node_modules/.bin:$PATH

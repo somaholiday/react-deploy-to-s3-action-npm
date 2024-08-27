@@ -28,6 +28,7 @@ if [ -n "$AWS_S3_ENDPOINT" ]; then
 fi
 
 # Override default NODE_ENV (production) if set by user.
+NODE_ENV_PREPEND="NODE_ENV=${NODE_ENV:-production}"
 NODE_PUBLIC_URL_PREPEND="PUBLIC_URL=${PUBLIC_URL:-https://multitool.xyz}"
 
 echo ${NODE_PUBLIC_URL_PREPEND}
@@ -45,7 +46,7 @@ EOF
 # - Build react bundle
 # - Sync using our dedicated profile and suppress verbose messages.
 #   All other flags are optional via the `args:` directive.
-sh -c "npm install" \
+sh -c "NODE_ENV=dev npm install" \
 && sh -c "${NODE_ENV_PREPEND} ${NODE_PUBLIC_URL_PREPEND} npm run build" \
 && sh -c "aws s3 sync ${SOURCE_DIR:-public} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
               --profile react-deploy-to-s3-action \

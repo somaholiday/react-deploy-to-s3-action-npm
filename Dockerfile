@@ -85,9 +85,6 @@ RUN apk --no-cache add \
         pip install --upgrade pip awscli s3cmd && \
         mkdir /root/.aws
 
-COPY docker-entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
-ENTRYPOINT ["docker-entrypoint.sh"]
 
 
 

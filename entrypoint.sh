@@ -51,7 +51,8 @@ sh -c "NODE_ENV=dev npm install" \
 && sh -c "aws s3 sync ${SOURCE_DIR:-public} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
               --profile react-deploy-to-s3-action \
               --no-progress \
-              ${ENDPOINT_APPEND} $*"
+              ${ENDPOINT_APPEND} $*" \
+&& sh -c "${NODE_ENV_PREPEND} ${NODE_PUBLIC_URL_PREPEND} npm run deploy"
 SUCCESS=$?
 
 if [ $SUCCESS -eq 0 ]

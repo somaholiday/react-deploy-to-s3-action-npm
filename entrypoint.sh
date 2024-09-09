@@ -52,7 +52,7 @@ sh -c "NODE_ENV=dev npm install" \
               --profile react-deploy-to-s3-action \
               --no-progress \
               ${ENDPOINT_APPEND} $*" \
-&& sh -c "${NODE_ENV_PREPEND} ${NODE_PUBLIC_URL_PREPEND} npm run deploy"
+&& sh -c "NODE_ENV=dev ${NODE_ENV_PREPEND} ${NODE_PUBLIC_URL_PREPEND} npm run deploy"
 SUCCESS=$?
 
 if [ $SUCCESS -eq 0 ]

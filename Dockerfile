@@ -5,6 +5,7 @@ RUN apk --no-cache add \
         curl \
         less \
         groff \
+        zip \
         jq \
         git \
         python3 \

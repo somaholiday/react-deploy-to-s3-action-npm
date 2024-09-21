@@ -44,20 +44,21 @@ EOF
 
 
 echo "Project directory: ${PROJECT_DIR:-.}"
-echo "Source directory: ${SOURCE_DIR:-public}"
+echo "Source directory:  ${SOURCE_DIR:-public}"
 
 # - Install dependencies
 # - Build react bundle
 # - Sync using our dedicated profile and suppress verbose messages.
 #   All other flags are optional via the `args:` directive.
-sh -c "cd ${PROJECT_DIR:-.}" \
-&& sh -c "npm install" \
-&& sh -c "${NODE_ENV_PREPEND} npm run build" \
-&& sh -c "aws s3 sync ${SOURCE_DIR:-public} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
-              --profile react-deploy-to-s3-action \
-              --no-progress \
-              ${ENDPOINT_APPEND} $*" \
-&& sh -c "cd -"
+sh -c "cd ${PROJECT_DIR:-.} && \
+      npm install && \
+      ${NODE_ENV_PREPEND} npm run build && \
+      aws s3 sync ${SOURCE_DIR:-public} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
+        --profile react-deploy-to-s3-action \
+        --no-progress \
+        ${ENDPOINT_APPEND} $* && \
+      cd -"
+
 # && sh -c "NODE_ENV=dev ${NODE_ENV_PREPEND} ${NODE_PUBLIC_URL_PREPEND} npm run deploy"
 SUCCESS=$?
 

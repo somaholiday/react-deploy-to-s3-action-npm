@@ -51,7 +51,7 @@ echo "Source directory:  ${SOURCE_DIR:-public}"
 # - Sync using our dedicated profile and suppress verbose messages.
 #   All other flags are optional via the `args:` directive.
 sh -c "cd ${PROJECT_DIR:-.} && \
-      npm install && \
+      npm install --include=dev && \
       ${NODE_ENV_PREPEND} npm run build && \
       aws s3 sync ${SOURCE_DIR:-public} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
         --profile react-deploy-to-s3-action \

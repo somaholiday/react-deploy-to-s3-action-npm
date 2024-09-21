@@ -42,6 +42,10 @@ ${AWS_REGION}
 text
 EOF
 
+
+echo "Project directory: ${PROJECT_DIR:-.}"
+echo "Source directory: ${SOURCE_DIR:-public}"
+
 # - Install dependencies
 # - Build react bundle
 # - Sync using our dedicated profile and suppress verbose messages.

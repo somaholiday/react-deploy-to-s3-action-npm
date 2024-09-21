@@ -17,9 +17,9 @@ if [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
   exit 1
 fi
 
-# Default to us-east-1 if AWS_REGION not set.
+# Default to us-west-2 if AWS_REGION not set.
 if [ -z "$AWS_REGION" ]; then
-  AWS_REGION="us-east-1"
+  AWS_REGION="us-west-2"
 fi
 
 # Override default AWS endpoint if user sets AWS_S3_ENDPOINT.
@@ -29,7 +29,7 @@ fi
 
 # Override default NODE_ENV (production) if set by user.
 NODE_ENV_PREPEND="NODE_ENV=${NODE_ENV:-production}"
-NODE_PUBLIC_URL_PREPEND="PUBLIC_URL=${PUBLIC_URL:-https://multitool.xyz}"
+NODE_PUBLIC_URL_PREPEND="PUBLIC_URL=${PUBLIC_URL}"
 
 echo ${NODE_PUBLIC_URL_PREPEND}
 

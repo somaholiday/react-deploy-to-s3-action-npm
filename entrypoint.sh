@@ -29,9 +29,7 @@ fi
 
 # Override default NODE_ENV (production) if set by user.
 NODE_ENV_PREPEND="NODE_ENV=${NODE_ENV:-production}"
-NODE_PUBLIC_URL_PREPEND="PUBLIC_URL=${PUBLIC_URL}"
-
-echo ${NODE_PUBLIC_URL_PREPEND}
+NODE_VITE_PREPEND="VITE_SPOTIFY_CLIENT_ID=${VITE_SPOTIFY_CLIENT_ID} VITE_SPOTIFY_REDIRECT_URL=${VITE_SPOTIFY_REDIRECT_URL}"
 
 # Create a dedicated profile for this action to avoid conflicts
 # with past/future actions.
@@ -54,7 +52,7 @@ echo "Source directory:    ${SOURCE_DIR:-public}"
 #   All other flags are optional via the `args:` directive.
 sh -c "cd ${PROJECT_DIR:-.} && \
       npm install --include=dev && \
-      ${NODE_ENV_PREPEND} npm run build && \
+      ${NODE_ENV_PREPEND} ${NODE_VITE_PREPEND} npm run build && \
       aws s3 sync ${SOURCE_DIR:-public} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
         --profile react-deploy-to-s3-action \
         --no-progress \

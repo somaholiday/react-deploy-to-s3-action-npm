@@ -42,9 +42,11 @@ ${AWS_REGION}
 text
 EOF
 
+echo "Environment variables:"
+sh -c "set"
 
-echo "Project directory: ${PROJECT_DIR:-.}"
-echo "Source directory:  ${SOURCE_DIR:-public}"
+echo "Project directory:   ${PROJECT_DIR:-.}"
+echo "Source directory:    ${SOURCE_DIR:-public}"
 
 # - Install dependencies
 # - Build react bundle

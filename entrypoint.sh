@@ -40,9 +40,6 @@ ${AWS_REGION}
 text
 EOF
 
-echo "Environment variables:"
-sh -c "set"
-
 echo "Project directory:   ${PROJECT_DIR:-.}"
 echo "Source directory:    ${SOURCE_DIR:-public}"
 
@@ -50,14 +47,14 @@ echo "Source directory:    ${SOURCE_DIR:-public}"
 # - Build react bundle
 # - Sync using our dedicated profile and suppress verbose messages.
 #   All other flags are optional via the `args:` directive.
-sh -c "cd ${PROJECT_DIR:-.} && \
-      npm install --include=dev && \
-      ${NODE_ENV_PREPEND} ${NODE_VITE_PREPEND} npm run build && \
-      aws s3 sync ${SOURCE_DIR:-public} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
-        --profile react-deploy-to-s3-action \
-        --no-progress \
-        ${ENDPOINT_APPEND} $* && \
-      cd -"
+cd ${PROJECT_DIR:-.}
+npm install --include=dev && \
+  npm run build && \
+  aws s3 sync ${SOURCE_DIR:-public} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
+    --profile react-deploy-to-s3-action \
+    --no-progress \
+    ${ENDPOINT_APPEND} $*
+cd -
 
 # && sh -c "NODE_ENV=dev ${NODE_ENV_PREPEND} ${NODE_PUBLIC_URL_PREPEND} npm run deploy"
 SUCCESS=$?

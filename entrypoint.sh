@@ -27,10 +27,6 @@ if [ -n "$AWS_S3_ENDPOINT" ]; then
   ENDPOINT_APPEND="--endpoint-url $AWS_S3_ENDPOINT"
 fi
 
-# Override default NODE_ENV (production) if set by user.
-NODE_ENV_PREPEND="NODE_ENV=${NODE_ENV:-production}"
-NODE_VITE_PREPEND="VITE_SPOTIFY_CLIENT_ID=${VITE_SPOTIFY_CLIENT_ID} VITE_SPOTIFY_REDIRECT_URL=${VITE_SPOTIFY_REDIRECT_URL}"
-
 # Create a dedicated profile for this action to avoid conflicts
 # with past/future actions.
 aws configure --profile react-deploy-to-s3-action <<-EOF > /dev/null 2>&1
@@ -39,9 +35,6 @@ ${AWS_SECRET_ACCESS_KEY}
 ${AWS_REGION}
 text
 EOF
-
-echo "Project directory:   ${PROJECT_DIR:-.}"
-echo "Source directory:    ${SOURCE_DIR:-public}"
 
 # - Install dependencies
 # - Build react bundle
@@ -56,7 +49,6 @@ npm install --include=dev && \
     ${ENDPOINT_APPEND} $*
 cd -
 
-# && sh -c "NODE_ENV=dev ${NODE_ENV_PREPEND} ${NODE_PUBLIC_URL_PREPEND} npm run deploy"
 SUCCESS=$?
 
 if [ $SUCCESS -eq 0 ]

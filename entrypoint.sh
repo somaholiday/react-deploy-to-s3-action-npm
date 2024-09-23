@@ -47,7 +47,7 @@ npm install --include=dev && \
     --profile react-deploy-to-s3-action \
     --no-progress \
     ${ENDPOINT_APPEND} $*
-cd -
+cd - > /dev/null
 
 SUCCESS=$?
 

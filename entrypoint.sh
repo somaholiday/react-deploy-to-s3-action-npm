@@ -41,7 +41,7 @@ EOF
 # - Sync using our dedicated profile and suppress verbose messages.
 #   All other flags are optional via the `args:` directive.
 cd ${PROJECT_DIR:-.}
-npm install --include=dev && \
+npm ci --include=dev && \
   npm run build && \
   aws s3 sync ${SOURCE_DIR:-public} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
     --profile react-deploy-to-s3-action \
